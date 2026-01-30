@@ -5,8 +5,17 @@ from database import Base
 
 
 # Create a Category model for products
+# Implementation
 class Category(Base):
     __tablename__ = "categories"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100), unique=True, nullable=False)
+
+    products = relationship("Product", back_populates="category")
+
+    def __repr__(self):
+        return f"<Category {self.name}>"
 
 
 class Product(Base):
